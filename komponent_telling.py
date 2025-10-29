@@ -1,49 +1,37 @@
 from graf_leser import Actor, Movie, adjacency_list_test
+from collections import deque, Counter
 
-def bfs(key): #key is a movie node and item is a set og actors
-    visited = [key] #Or seen
-    been_to = []
-    queue = [key]
-    #current_node = key
+def bfs(adj, start_node): #key is a movie node and item is a set og actors
+    visited = set() #Or seen
+    queue = deque()
 
-    while len(queue) != 0:
-        current_set = set()
-        current_node = queue.pop()
-        been_to.append(current_node)
-        if isinstance(current_node, Actor):
-            current_set = current_node._movie_set
-        elif isinstance(current_node, Movie):
-            current_set = current_node._actor_set
-        
-        for item in current_set:
+    visited.add(start_node)
+    queue.append(start_node)
+
+    while queue:
+        current = queue.popleft()
+        neighbours = adj.get(current, set()) #Returns set in case there isn't a value for the key
+        for item in neighbours:
             if item not in visited:
-                visited.append(item)
+                visited.add(item)
                 queue.append(item)
     return visited
                 
 def component_finding(adj): #adj is a dictionary
-    components = []
-    visited_list = []
-    comp_dict = {}
+    visited = set()
+    counter = Counter()
 
-    for key in adj.keys():
-        if key in visited_list:
+    for node in adj.keys():
+        if node in visited:
             continue
-        partial_visited_list = bfs(key)
-        components.append(partial_visited_list)
-        visited_list = visited_list + partial_visited_list
+        component = bfs(adj, node)
+        visited.update(component)
 
-    for component_partial_list in components:
-        amount_actors_components = 0
-        for element in component_partial_list:
-            if isinstance(element, Actor):
-                amount_actors_components += 1
+        actor_count = sum(1 for n in component if isinstance(n, Actor))
+        counter[actor_count] += 1
 
-        if amount_actors_components in comp_dict:
-            #It will be a dict amount_actors --> amount of components with
-            comp_dict[amount_actors_components] += 1 
-        else:
-            comp_dict[amount_actors_components] = 1
-    return comp_dict
+    return dict(counter)
+
+
 
 print(component_finding(adjacency_list_test))

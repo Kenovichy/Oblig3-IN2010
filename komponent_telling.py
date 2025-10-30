@@ -32,6 +32,3 @@ def component_finding(adj): #adj is a dictionary
 
     return dict(counter)
 
-
-
-print(component_finding(adjacency_list_test))

@@ -114,5 +114,5 @@ def count(adjacency_list):
 
 adjacency_list_test = adjacency_list(actors, movies)
 
-
-
+if __name__ == "__main__":
+    print(count(adjacency_list_test))

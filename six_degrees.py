@@ -45,17 +45,15 @@ def find_end_node(adj, start_id, end_id):
         if current_node == end_node:
             break
 
+        if current_node in closed_set:
+            continue
         closed_set.add(current_node)
         for n in adj.get(current_node, set()):
             if n in closed_set:
                 continue
 
             tentative_cost = seen_nodes[current_node][0] + 1
-            if n in seen_nodes.keys():
-                if tentative_cost < seen_nodes[n][0]:
-                    seen_nodes[n][0] = tentative_cost
-                    seen_nodes[n][1] = current_node #Sets new parent
-            else:
+            if n not in seen_nodes.keys():
                 seen_nodes[n] = (tentative_cost, current_node)
 
             if n not in closed_set:
@@ -74,5 +72,6 @@ def print_path(path):
         string = f"===[ {movie.get_title()} ({movie.get_rating()}) ] ===> {actor.get_name()}"
         print(string)
 
-
-
+if __name__ == "__main__":
+    shortest_path = find_end_node(adjacency_list_test, "nm0000313", "nm0140504") # endre start og slutt her
+    print_path(shortest_path)

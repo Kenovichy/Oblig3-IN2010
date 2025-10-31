@@ -1,4 +1,4 @@
-from graf_leser import Actor, Movie, adjacency_list_test
+from graf_leser import Actor, adjacency_list_test
 from collections import deque, Counter
 
 def bfs(adj, start_node): #key is a movie node and item is a set og actors
@@ -32,3 +32,12 @@ def component_finding(adj): #adj is a dictionary
 
     return dict(counter)
 
+def print_component_sizes(comps):
+    sorted_comps = dict(sorted(comps.items(), reverse=True))
+    for key, value in sorted_comps.items():
+        if key == 0:
+            continue
+        print(f"There are {value} components of size {key}")
+
+if __name__ == "__main__":
+    print_component_sizes(component_finding(adjacency_list_test))

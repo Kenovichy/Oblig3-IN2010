@@ -11,14 +11,13 @@ def both_nodes_in_component(adj, start_node, end_node):
     return False
 
 def find_path(node, node_dict):
-    path = []
+    path = [node]
     current_node = node
-    print(f"Current node: {current_node}")
-    print(f"Test: {node_dict[current_node][1]}")
-    while node_dict[current_node][0] != "":
+    while node_dict[current_node][1] != "":
         parent = node_dict[current_node][1]
-        path.append(parent)
+        path.append(str(parent))
         current_node = parent
+    path.reverse()
     return path
 
 def id_to_node(start_id, end_id):
@@ -64,14 +63,12 @@ def find_end_node(adj, start_id, end_id):
             if n not in closed_set:
                 tie_breaker += 1
                 heapq.heappush(open_heap, (seen_nodes[n][0],tie_breaker, n)) #If not seen then should be explored 
-    
-    return(find_path(current_node, seen_nodes))
+    amount_of_edges = len(find_path(current_node, seen_nodes))
+    return f"It takes {amount_of_edges - 1} connections to get from {start_node} to {end_node}"
 
-print(find_end_node(adjacency_list_test, "nm0000313", "nm0442207"))
-
-
-
-                    
+answer = find_end_node(adjacency_list_test, "nm0000313", "nm0140504")
+print(answer)
+         
 
 
 

@@ -63,8 +63,8 @@ def tsv_reader(filename, list):
 actors = [] #nm-id Navn tt-id_1 tt-id_2 .... tt-id_k
 movies = [] #tt-id Tittel Rating Antall Stemmer 
 
-tsv_reader("marvel_actors.tsv", actors)
-tsv_reader("marvel_movies.tsv", movies)
+tsv_reader("actors.tsv", actors)
+tsv_reader("movies.tsv", movies)
 #Vi gjør adjacency list for å representere grafene
 
 def adjacency_list(actors, movies):

@@ -74,6 +74,5 @@ def print_path(path):
         string = f"===[ {movie.get_title()} ({movie.get_rating()}) ] ===> {actor.get_name()}"
         print(string)
 
-shortest_path = find_end_node(adjacency_list_test, "nm0000313", "nm0140504")
-print_path(shortest_path)
+
 

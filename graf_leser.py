@@ -99,7 +99,7 @@ def adjacency_list(actors, movies):
     
     for val in movie_dict.values():
         output_dict[val] = val._actor_set
-
+        
     return output_dict
 
 def count(adjacency_list):

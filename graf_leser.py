@@ -13,6 +13,9 @@ class Actor:
     def add_movie_set(self, movie_set):
         self._movie_set = movie_set
 
+    def get_name(self):
+        return self._name
+
     def __str__(self):
         string = f"{self._name} | {self._nmid} | "
         for item in self._movie_set:
@@ -41,6 +44,12 @@ class Movie:
     def return_id(self):
         return self._ttid
 
+    def get_title(self):
+        return self._title
+
+    def get_rating(self):
+        return self._rating
+
     def __eq__(self, value):
         if not isinstance(value, Movie):
             return 
@@ -63,8 +72,8 @@ def tsv_reader(filename, list):
 actors = [] #nm-id Navn tt-id_1 tt-id_2 .... tt-id_k
 movies = [] #tt-id Tittel Rating Antall Stemmer 
 
-tsv_reader("marvel_actors.tsv", actors)
-tsv_reader("marvel_movies.tsv", movies)
+tsv_reader("actors.tsv", actors)
+tsv_reader("movies.tsv", movies)
 #Vi gjør adjacency list for å representere grafene
 
 def adjacency_list(actors, movies):
